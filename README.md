@@ -4,7 +4,7 @@
 **URL** [multiverse-os.org](https://multiverse-os.org)
 
 ### Introduction
-A bare-bones skeleton-like router implemented primarily as a library, intended to function as a drop in P2P networking support. 
+A bare-bones skeleton-like router implemented primarily as a library, intended to function as a drop in P2P networking support. Decentralized applications, and multiparty computation without a blockchain or currency.
 
 #### Software-defined Tunnels
 The goal is to enable developers create simple expressive scripts that a ruleset for specific or non-specific tunnel creation. This functionality combines the functionality of Tor and I2C, and extends it further into the limits of the imagination of interested developers. The creation of bots that use the network in erratic ways to obstuficate actual traffic, or missing traffic indicating you are not home, or anonymize your traffic, obstuficating your DNS lookups by sending fake ones to your ISP while doing all real lookups over encrypted connections tunneled through other protocols, sending data through the distance of time between each different DNS request made to a server at the end of a tunnel. 
@@ -94,6 +94,13 @@ COMMANDS:
     /unset [config]              - Unset configuration option
     /save                        - Save configuration values
 
+  // Build Tunnel
+  // Run Ruby code to create binary that is loadable and used to create a Go struct
+  // Define P2P network using tunnels to connect the network
+  // Define DHT write rules using script 
+  // 
+
+
   TOR:
     /tor [start|stop]            - Start or stop Tor process
     /newtor                      - Obtain new Tor identity 
@@ -101,31 +108,38 @@ COMMANDS:
     // TODO: Needs to add support for I2C and wormholes own overlay network
     // TODO: Experiment with securing writing to several interconnected DHTs by using ring signatures. Enabling sharded data or different tables of data to be securely modified in a way that is resistant to race conditions
 
+  // Store ephemeral ping map
+  // Store ephemeral geolocal map encrypted to friends
+  // Support Gossip discovery
+  // Support `wormhole://`hash( or name in DNS DHT) and support `peer://` `friend://` `friend://miamigasamiga@myfriend/send_money/5/USD`
   NETWORK:
     /peers                       - List all connected peers
-    /successor                   - Next peer in identifier ring (Not Implemented)
-    /predecessor                 - Previous peer in identifier ring (Not Implemented)
-    /ftable                      - List ftable peers (Not Implemented)
-    /create                      - Create new ring (Not Implemented)
+    /successor                   - Next peer in identifier ring
+    /predecessor                 - Previous peer in identifier ring
+    /ftable                      - List ftable peers
+    /create                      - Create new ring
     /connect [onion address]     - Join ring containing peer with [onion address]
-    /lookup [id]                 - Find onion address of account with [id] (Not Implemented)
+    /lookup [id]                 - Find onion address of account with [id] 
     /ping [onion address]        - Ping peer (Not Implemented)
-    /ringcast [message]          - Message every peer in ring (Not Implemented)
+    /ringcast [message]          - Message every peer in ring 
 
+  // NOTE: Each node of the DHT needs its own onion address! 
+  //       Each block/chunk in a file that is being distributed over upgraded torrent protocol has its own onion address. This could enable truly trackerless torrents. 
   DHT:
-    /put [key] [value]           - Put key and value into database (Not Implemented)
-    /get [key]                   - Get value of key (Not Implemented)
+    /put [key] [value]           - Put key and value into database
+    /get [key]                   - Get value of key 
     /delete [key]                - Delete key and its value from database (Not Implemented)
 
   WEBUI:
     /webui [start|stop]          - Start or stop webUI server
 
+  // Derive SSH key or others from existing keys. Like take PGP key and use it to deterministically generate other keys that can be used to generate session keys. And session keys. And build in key signing, and web of trust formation. Build in how well you can verify, was it a key signing party, or you know this person. Favor onion keys, or scramble key for routing through wormholes overlay network. Have account generation that creates ways to recover root key that is held cold as possible. 
   ACCOUNT:
-    /accounts                    - List all local accounts (Not Implemented)
-    /generate                    - Generate new account key pair (Not Implemented)
-    /delete                      - Delete an account key pair (Not Implemented)
-    /sign [id] [message]         - Sign with account key pair (Not Implemented)
-    /verify [id] [message]       - Verify a signed message with key pair (Not Implemented)
+    /accounts                    - List all local accounts
+    /generate                    - Generate new account key pair
+    /delete                      - Delete an account key pair
+    /sign [id] [message]         - Sign with account key pair
+    /verify [id] [message]       - Verify a signed message with key pair
     /encrypt [id] [message]      - Encrypt a message with key pair (Not Implemented)
     /decrypt [id] [message]      - Decrypt a message with key pair (Not Implemented)
 
@@ -137,12 +151,13 @@ COMMANDS:
     /whisper [id] [message]      - Direct message peer (Not Implemented)
     /contactcast [message]       - Message all contacts (Not Implemented)
 
+  // Topics? Ephemeral? Timeout if no posts after x time? Ability to receive donations ability to send files
   CHANNELS:
-    /channels                    - List all known channels (Not Implemented)
-    /channel                     - Generates a new channel (Not Implemented)
-    /join [id]                   - Join channel with id (Not Implemented)
-    /leave [id]                  - Leave channel with id (Not Implemented)
-    /channelcast [id] [message]  - Message all channel subscribers (Not Implemented)
+    /channels                    - List all known channels
+    /channel                     - Generates a new channel
+    /join [id]                   - Join channel with id
+    /leave [id]                  - Leave channel with id
+    /channelcast [id] [message]  - Message all channel subscribers
 
     /quit                        - Quit oht console
 ```
